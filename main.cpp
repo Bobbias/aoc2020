@@ -16,8 +16,8 @@
 auto getInputVector() {
 
     std::ifstream ifs(INPUT_FOLDER + "day1.input.txt", std::ifstream::in);
-    std::vector<util::Line> v;
-    read_lines(ifs, std::back_inserter(v));
+    std::vector<util::line> v;
+    readLines(ifs, std::back_inserter(v));
 
     return v;
 }
@@ -47,17 +47,17 @@ int main() {
 
     std::cout << "output:\n";
 
-    auto res = std::reduce(ints.begin(), ints.end(),
-                           0,
-                           [ints](const auto &a, const auto &b) {
-                               auto c = std::find(ints.begin(), ints.end(), 2020 - a);
-                               if (c != ints.end()) {
-                                   return *c * a;
-                               } else {
-                                   return 0;
-                               }
-                           }
-    );
+//    auto res = std::reduce(ints.begin(), ints.end(),
+//                           0,
+//                           [ints](const auto &a, const auto &b) {
+//                               auto c = std::find(ints.begin(), ints.end(), 2020 - a);
+//                               if (c != ints.end()) {
+//                                   return *c * a;
+//                               } else {
+//                                   return 0;
+//                               }
+//                           }
+//    );
 
     std::cout << res << "\n";
 
