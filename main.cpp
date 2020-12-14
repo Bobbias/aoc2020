@@ -42,24 +42,16 @@ int main() {
     for (const auto &n : ints) {
         std::cout << n << "\n";
     }
-    std::vector<int> out;
+
+
+    auto out = filterReduce(ints.begin(), ints.end(),
+                            [ints](const auto &a, const auto &b) { return p(a, b); },
+                            f);
 
 
     std::cout << "output:\n";
 
-//    auto res = std::reduce(ints.begin(), ints.end(),
-//                           0,
-//                           [ints](const auto &a, const auto &b) {
-//                               auto c = std::find(ints.begin(), ints.end(), 2020 - a);
-//                               if (c != ints.end()) {
-//                                   return *c * a;
-//                               } else {
-//                                   return 0;
-//                               }
-//                           }
-//    );
-
-    std::cout << res << "\n";
+    std::cout << out << "\n";
 
     return 0;
 }

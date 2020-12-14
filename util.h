@@ -23,6 +23,20 @@ void readLines(std::istream &is, OutIt dest) {
     std::copy(inIt(is), inIt(), dest);
 }
 
+template<typename T>
+concept Integral = std::is_integral<T>::value;
+
+template<Integral t, typename ForwardIter>
+auto p(const t &a, const t &b, ForwardIter ints) {
+    if (std::find(ints.begin(), ints.end(), a - 2020) != ints.end()) return true;
+    else return false;
+}
+
+template<Integral t>
+auto f(const t &a, const t &b) {
+    return a * b;
+}
+
 /*
  * idea:
  *  iterate each number
