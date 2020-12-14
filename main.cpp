@@ -43,15 +43,17 @@ int main() {
         std::cout << n << "\n";
     }
 
-
     auto out = filterReduce(ints.begin(), ints.end(),
-                            [ints](const auto &a, const auto &b) { return p(a, b); },
-                            f);
+                            [ints](const auto &a) { return p(a, ints); },
+                            [](const auto &a) { return f<int>(a); });
 
+    if (out) {
+        std::cout << "output:\n";
 
-    std::cout << "output:\n";
-
-    std::cout << out << "\n";
+        std::cout << out.value() << "\n";
+    } else {
+        std::cout << "shit's broke yo\n";
+    }
 
     return 0;
 }

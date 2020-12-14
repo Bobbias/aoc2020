@@ -27,34 +27,26 @@ template<typename T>
 concept Integral = std::is_integral<T>::value;
 
 template<Integral t, typename ForwardIter>
-auto p(const t &a, const t &b, ForwardIter ints) {
+auto p(const t &a, ForwardIter ints) {
     if (std::find(ints.begin(), ints.end(), a - 2020) != ints.end()) return true;
     else return false;
 }
 
 template<Integral t>
-auto f(const t &a, const t &b) {
-    return a * b;
+std::optional<t> f(const t &a) {
+    return std::optional<t>(a * (2020 - a));
 }
 
-/*
- * idea:
- *  iterate each number
- *  subtract number from 2020 and run std::find to check if the result is in the list
- *  if it is, we're done, return current item, result, and current item * result
- *
- *  return {item, result, item * result};
- */
-
-template<typename ForwardIter, typename UnaryPred, typename function>
-auto filterReduce(ForwardIter begin, ForwardIter end, UnaryPred pred, function fun) -> decltype(fun(begin)) {
+template<typename ForwardIter, typename UnaryPred, typename BinaryFunction>
+auto filterReduce(ForwardIter begin, ForwardIter end, UnaryPred pred, BinaryFunction fun) {
     while (begin != end) {
-        if (pred(begin)) {
-            return std::optional<decltype(fun(begin))>(fun(begin));
+        if (pred(*begin)) {
+            std::optional<int> result = fun(*begin);
+            return result;
         }
         begin++;
     }
-    return {};
+    return std::optional<int>(std::nullopt);
 }
 
 #endif //UNTITLED_UTIL_H
