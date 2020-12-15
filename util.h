@@ -27,18 +27,31 @@ template<typename T>
 concept Integral = std::is_integral<T>::value;
 
 template<Integral t, typename ForwardIter>
-auto p(const t &a, ForwardIter ints) {
-    if (std::find(ints.begin(), ints.end(), a - 2020) != ints.end()) return true;
+auto isDay1SolutionNumber(const t &a, ForwardIter ints) {
+    if (std::find(ints.begin(), ints.end(), 2020 - a) != ints.end()) return true;
     else return false;
 }
 
+///
+/// \tparam t
+/// \param a
+/// \return
 template<Integral t>
-std::optional<t> f(const t &a) {
+std::optional<t> getSecondDay1SolutionNumber(const t &a) {
     return std::optional<t>(a * (2020 - a));
 }
 
+/// Iterates through the given iterator and applies pred to each input, when the predicate is true, it will apply
+/// \tparam ForwardIter The type of our input iterator
+/// \tparam UnaryPred The type of the predicate parameter function
+/// \tparam BinaryFunction The Type of the reduce parameter function
+/// \param begin
+/// \param end
+/// \param pred A predicate to apply to
+/// \param fun The function to apply to the filtered result(s)
+/// \return
 template<typename ForwardIter, typename UnaryPred, typename BinaryFunction>
-auto filterReduce(ForwardIter begin, ForwardIter end, UnaryPred pred, BinaryFunction fun) {
+auto filterReduce(ForwardIter begin, ForwardIter end, UnaryPred pred, BinaryFunction fun) -> decltype(fun(*begin)) {
     while (begin != end) {
         if (pred(*begin)) {
             std::optional<int> result = fun(*begin);

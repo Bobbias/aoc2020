@@ -44,8 +44,8 @@ int main() {
     }
 
     auto out = filterReduce(ints.begin(), ints.end(),
-                            [ints](const auto &a) { return p(a, ints); },
-                            [](const auto &a) { return f<int>(a); });
+                            [ints](const auto &a) { return isDay1SolutionNumber(a, ints); },
+                            [](const auto &a) { return getSecondDay1SolutionNumber<int>(a); });
 
     if (out) {
         std::cout << "output:\n";
