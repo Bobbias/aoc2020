@@ -22,38 +22,45 @@ auto getInputVector() {
     return v;
 }
 
+auto solveDay1Part1() {
+  auto items{getInputVector()};
+
+  for (const auto &l : items) {
+    std::cout << l << "\n";
+  }
+
+  std::vector<int> ints;
+  std::transform(items.begin(), items.end(), std::back_inserter(ints),
+                 [](const std::string &s) { return std::stoi(s); });
+  std::sort(ints.begin(), ints.end());
+
+  std::cout << "as sorted ints:\n";
+
+  for (const auto &n : ints) {
+    std::cout << n << "\n";
+  }
+
+  auto out = filterReduce(
+      ints.begin(), ints.end(),
+      [ints](const auto &a) { return isDay1SolutionNumber(a, ints); },
+      [](const auto &a) { return getSecondDay1SolutionNumber<int>(a); });
+
+  if (out) {
+    std::cout << "output:\n";
+
+    std::cout << out.value() << "\n";
+  } else {
+    std::cout << "shit's broke yo\n";
+  }
+}
+
+auto solveDay10Part1(){
+
+};
+
 int main() {
 
-    auto items{getInputVector()};
+  solveDay1Part1();
 
-    for (const auto &l : items) {
-        std::cout << l << "\n";
-    }
-
-    std::vector<int> ints;
-    std::transform(items.begin(),
-                   items.end(),
-                   std::back_inserter(ints),
-                   [](const std::string &s) { return std::stoi(s); });
-    std::sort(ints.begin(), ints.end());
-
-    std::cout << "as sorted ints:\n";
-
-    for (const auto &n : ints) {
-        std::cout << n << "\n";
-    }
-
-    auto out = filterReduce(ints.begin(), ints.end(),
-                            [ints](const auto &a) { return isDay1SolutionNumber(a, ints); },
-                            [](const auto &a) { return getSecondDay1SolutionNumber<int>(a); });
-
-    if (out) {
-        std::cout << "output:\n";
-
-        std::cout << out.value() << "\n";
-    } else {
-        std::cout << "shit's broke yo\n";
-    }
-
-    return 0;
+  return 0;
 }
