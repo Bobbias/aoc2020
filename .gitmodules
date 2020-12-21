@@ -1,0 +1,4 @@
+[submodule "AOCpp/libs/gtest"]
+	path = AOCpp/libs/gtest
+	url = https://github.com/google/googletest.git
+	branch = 703bd9c

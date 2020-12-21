@@ -2,19 +2,19 @@
 // Created by Bobbias on 2020-12-13.
 //
 
-#ifndef UNTITLED_UTIL_H
-#define UNTITLED_UTIL_H
+#ifndef UNTITLED_UTIL_HPP
+#define UNTITLED_UTIL_HPP
 
-#include <string>
 #include <functional>
 #include <optional>
+#include <string>
 
 namespace util {
-    class line : public std::string {
-        friend std::istream &operator>>(std::istream &is, line &line) {
-            return std::getline(is, line);
-        }
-    };
+class line : public std::string {
+  friend std::istream &operator>>(std::istream &is, line &line) {
+    return std::getline(is, line);
+  }
+};
 }
 
 template<class OutIt>
@@ -62,4 +62,4 @@ auto filterReduce(ForwardIter begin, ForwardIter end, UnaryPred pred, BinaryFunc
     return std::optional<int>(std::nullopt);
 }
 
-#endif //UNTITLED_UTIL_H
+#endif // UNTITLED_UTIL_HPP

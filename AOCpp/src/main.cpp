@@ -1,25 +1,26 @@
-#include <iostream>
-#include <map>
-#include <set>
-#include <fstream>
+#include "constants.hpp"
+#include "util.hpp"
 #include <algorithm>
-#include <numeric>
+#include <fstream>
+#include <iostream>
 #include <iterator>
-#include "constants.h"
-#include "util.h"
+#include <map>
+#include <numeric>
+#include <set>
 
 /*
- * note: find the two entries that sum to 2020 and then multiply those two numbers together.
+ * note: find the two entries that sum to 2020 and then multiply those two
+ * numbers together.
  *
  */
 
-auto getInputVector() {
+const auto &getInputVector() {
 
-    std::ifstream ifs(INPUT_FOLDER + "day1.input.txt", std::ifstream::in);
-    std::vector<util::line> v;
-    readLines(ifs, std::back_inserter(v));
+  std::ifstream ifs(INPUT_FOLDER + "day1.input.txt", std::ifstream::in);
+  auto *v = new std::vector<util::line>;
+  readLines(ifs, std::back_inserter((*v)));
 
-    return v;
+  return (*v);
 }
 
 auto solveDay1Part1() {
@@ -40,7 +41,7 @@ auto solveDay1Part1() {
     std::cout << n << "\n";
   }
 
-  auto out = filterReduce(
+  const auto &out = filterReduce(
       ints.begin(), ints.end(),
       [ints](const auto &a) { return isDay1SolutionNumber(a, ints); },
       [](const auto &a) { return getSecondDay1SolutionNumber<int>(a); });

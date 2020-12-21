@@ -3,6 +3,4 @@ project(untitled)
 
 set(CMAKE_CXX_STANDARD 20)
 
-add_subdirectory(tests)
-
-add_executable(untitled main.cpp constants.h util.h)
+add_subdirectory(AOCpp)
